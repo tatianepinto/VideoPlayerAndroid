@@ -19,7 +19,6 @@ class VideoViewModel: ViewModel() {
             try {
                 val listResult = Api.retrofitService.getVideos()
                 _status.value = "Success: ${listResult.size} videos retrieved"
-                Log.d("VideoPlayerCheck", listResult.size.toString())
             } catch (e: Exception) {
                 e.message?.let { Log.d("VideoPlayerCheck", it) }
                 _status.value = "Failure: ${e.message}"

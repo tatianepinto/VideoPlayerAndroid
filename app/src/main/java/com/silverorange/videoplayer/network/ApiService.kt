@@ -20,7 +20,7 @@ private val retrofit = Retrofit.Builder()
 
 interface ApiService {
     @GET("videos")
-    suspend fun getVideos() : List<Item>
+    suspend fun getVideos() : List<Video>
 }
 
 object Api {
