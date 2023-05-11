@@ -1,6 +1,7 @@
 package com.silverorange.videoplayer.ui
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -12,19 +13,15 @@ import com.silverorange.videoplayer.R
 import com.silverorange.videoplayer.adapter.VideosRecyclerViewAdapter
 import com.silverorange.videoplayer.overview.VideoViewModel
 import kotlinx.android.synthetic.main.activity_main.et_name
+import kotlinx.android.synthetic.main.activity_main.video_main
 import kotlinx.android.synthetic.main.video_view_holder.et_title
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var listRecyclerView: RecyclerView
     private lateinit var viewModel: VideoViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        listRecyclerView = findViewById(R.id.videos_recyclerview)
-        listRecyclerView.layoutManager = LinearLayoutManager(this)
-        listRecyclerView.adapter = VideosRecyclerViewAdapter { videoItem: String -> goToVideoDetail(videoItem) }
 
         setupViewModel()
     }
@@ -44,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         } )
 
         viewModel.allVideos.observe(this, Observer {
-            (listRecyclerView.adapter as VideosRecyclerViewAdapter).setVideos(it)
+            video_main.setVideoURI(Uri.parse(it[0].fullURL))
         } )
     }
 }
