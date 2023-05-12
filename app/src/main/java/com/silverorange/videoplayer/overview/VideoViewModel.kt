@@ -21,7 +21,7 @@ class VideoViewModel: ViewModel() {
     private fun getAllVideos() {
         viewModelScope.launch {
             try {
-                val listResult = Api.retrofitService.getVideos()
+                val listResult = Api.retrofitService.getVideos().sortedBy { it.publishedAt }
                 _status.value = "Success: ${listResult.size} videos retrieved"
                 _allVideos.value = listResult
             } catch (e: Exception) {
