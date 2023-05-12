@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.silverorange.videoplayer.network.Api
 import androidx.lifecycle.viewModelScope
-import com.silverorange.videoplayer.network.Author
 import com.silverorange.videoplayer.network.Video
 import kotlinx.coroutines.launch
 

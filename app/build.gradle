@@ -51,5 +51,5 @@ dependencies {
     //extra
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     //markdown
-    implementation 'com.github.mukeshsolanki:MarkdownView-Android:2.0.0'
+    implementation 'com.vladsch.flexmark:flexmark:0.62.2'
 }

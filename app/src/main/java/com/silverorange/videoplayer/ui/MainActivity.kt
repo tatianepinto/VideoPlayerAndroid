@@ -1,19 +1,21 @@
 package com.silverorange.videoplayer.ui
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.ImageButton
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.silverorange.videoplayer.R
 import com.silverorange.videoplayer.overview.VideoViewModel
-import kotlinx.android.synthetic.main.activity_main.et_description
+import com.vladsch.flexmark.html.HtmlRenderer
+import com.vladsch.flexmark.parser.Parser
 import kotlinx.android.synthetic.main.activity_main.et_name
 import kotlinx.android.synthetic.main.activity_main.et_published
 import kotlinx.android.synthetic.main.activity_main.et_title
@@ -101,7 +103,15 @@ class MainActivity : AppCompatActivity() {
             val date = Date.from(instant)
             val publishedDate = SimpleDateFormat("MMMM dd, yyyy", Locale.US).format(date)
             et_published.text = "Published: $publishedDate"
-            et_description.text = it[index].description
+            val parser = Parser.builder().build()
+            val renderer = HtmlRenderer.builder().build()
+
+            val renderedDescription = renderer.render(parser.parse(it[index].description))
+
+            val webView = findViewById<WebView>(R.id.et_description)
+            webView.webViewClient = WebViewClient()
+            webView.settings.javaScriptEnabled = true
+            webView.loadData(renderedDescription, "text/html; charset=utf-8", "UTF-8")
         } )
     }
 
