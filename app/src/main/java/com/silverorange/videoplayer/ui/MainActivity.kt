@@ -77,10 +77,12 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupScreenInfo(index: Int) {
         viewModel.allVideos.observe(this, Observer {
-            Log.d("VideoPlayerCheck", "Index: "+index)
             if (index === 0) setupBackButton()
             if (index + 1 === it.size) setupNextButton()
-            video_main.setVideoURI(Uri.parse(it[index].fullURL))
+            val url = if (it[index].fullURL.contains("/full/720.mp4")) it[index].fullURL
+                else it[index].fullURL.replace("/720.mp4", "/full/720.mp4")
+            Log.d("VideoPlayerCheck", url)
+            video_main.setVideoURI(Uri.parse(url))
             video_main.start()
             et_title.text = it[index].title
             val instant = Instant.parse(it[index].publishedAt)
