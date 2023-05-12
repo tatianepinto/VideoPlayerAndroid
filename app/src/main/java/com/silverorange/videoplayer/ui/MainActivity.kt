@@ -74,12 +74,6 @@ class MainActivity : AppCompatActivity() {
         nextButton.alpha = 0.5f
     }
 
-    private fun goToVideoDetail(videoItem: String?) {
-        val intent = Intent(this, VideoDetailActivity::class.java)
-        videoItem.let { intent.putExtra("id", it) }
-        startActivity(intent)
-    }
-
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupViewModel(currentVideoIndex: Int) {
         viewModel = ViewModelProvider(this)[VideoViewModel::class.java]
