@@ -35,6 +35,25 @@ class MainActivity : AppCompatActivity() {
 
         setupViewModel(currentVideoIndex)
         setupBackButton()
+        disablePlayButton()
+    }
+
+    private fun disablePlayButton() {
+        val playButton = findViewById<ImageButton>(R.id.ib_play)
+        playButton.isEnabled = false
+        playButton.alpha = 0.5f
+        val pauseButton = findViewById<ImageButton>(R.id.ib_pause)
+        pauseButton.isEnabled = true
+        pauseButton.alpha = 1f
+    }
+
+    private fun disablePauseButton() {
+        val pauseButton = findViewById<ImageButton>(R.id.ib_pause)
+        pauseButton.isEnabled = false
+        pauseButton.alpha = 0.5f
+        val playButton = findViewById<ImageButton>(R.id.ib_play)
+        playButton.isEnabled = true
+        playButton.alpha = 1f
     }
 
     private fun setupBackButton() {
@@ -81,7 +100,6 @@ class MainActivity : AppCompatActivity() {
             if (index + 1 === it.size) setupNextButton()
             val url = if (it[index].fullURL.contains("/full/720.mp4")) it[index].fullURL
                 else it[index].fullURL.replace("/720.mp4", "/full/720.mp4")
-            Log.d("VideoPlayerCheck", url)
             video_main.setVideoURI(Uri.parse(url))
             video_main.start()
             et_title.text = it[index].title
@@ -102,5 +120,15 @@ class MainActivity : AppCompatActivity() {
     fun onBackClick(view: View) {
         currentVideoIndex -= 1
         setupViewModel(currentVideoIndex)
+    }
+
+    fun onClickPlayVideo(view: View) {
+        disablePlayButton()
+        video_main.start()
+    }
+
+    fun onClickPauseVideo(view: View) {
+        disablePauseButton()
+        video_main.pause()
     }
 }

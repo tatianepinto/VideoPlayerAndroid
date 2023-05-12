@@ -43,6 +43,7 @@
                     android:layout_marginBottom="3px"
                     android:layout_weight="1"
                     android:background="#D1D1D1"
+                    android:onClick="onClickPlayVideo"
                     app:srcCompat="@drawable/play" />
 
                 <ImageButton
@@ -52,6 +53,7 @@
                     android:layout_marginTop="3px"
                     android:layout_weight="1"
                     android:background="#D1D1D1"
+                    android:onClick="onClickPauseVideo"
                     app:srcCompat="@drawable/pause" />
             </LinearLayout>
         </LinearLayout>
