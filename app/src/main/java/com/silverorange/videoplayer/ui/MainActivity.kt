@@ -16,6 +16,7 @@ import com.silverorange.videoplayer.R
 import com.silverorange.videoplayer.overview.VideoViewModel
 import com.vladsch.flexmark.html.HtmlRenderer
 import com.vladsch.flexmark.parser.Parser
+import kotlinx.android.synthetic.main.activity_main.et_author
 import kotlinx.android.synthetic.main.activity_main.et_name
 import kotlinx.android.synthetic.main.activity_main.et_published
 import kotlinx.android.synthetic.main.activity_main.et_title
@@ -99,10 +100,12 @@ class MainActivity : AppCompatActivity() {
             video_main.setVideoURI(Uri.parse(url))
             video_main.start()
             et_title.text = it[index].title
+            et_author.text = it[index].author.name
             val instant = Instant.parse(it[index].publishedAt)
             val date = Date.from(instant)
             val publishedDate = SimpleDateFormat("MMMM dd, yyyy", Locale.US).format(date)
             et_published.text = "Published: $publishedDate"
+            //Rendering markdown
             val parser = Parser.builder().build()
             val renderer = HtmlRenderer.builder().build()
 
